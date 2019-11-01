@@ -1,3 +1,4 @@
+<%@page import="com.jh.member.MemberDTO"%>
 <%@page import="com.jh.notice.NoticeDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -31,7 +32,7 @@
   </style>
 </head>
 <body>
-
+<%@ include file="../layout/nav.jsp" %>
 <div class="container">
   <h2>Notice Select Page</h2>
   <ul class="list-group">
@@ -42,8 +43,11 @@
   </ul>
    <p>CONTENTS: <%= noticeDTO.getContents() %></p>
 	<div id="box">
+	<%if(memberDTO !=null && memberDTO.getId().equals(noticeDTO.getWriter())) {%>
 	<a class = "btn btn-primary" href="./noticeUpdate.jsp?num=<%= noticeDTO.getNum()%>">수정</a>
  	<a class = "btn btn-danger" href="./noticeDeleteResult.jsp?num=<%= noticeDTO.getNum()%>">삭제</a>
+ 	<% }%>
+ 	
 	</div>
 </div>
 </body>

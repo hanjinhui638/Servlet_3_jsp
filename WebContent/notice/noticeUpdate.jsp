@@ -27,12 +27,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+ 
 </head>
 <body>
+<%@ include file="../layout/nav.jsp" %>
+<%
+	if(memberDTO == null && !memberDTO.getId().equals(noticeDTO.getWriter())){
+		request.setAttribute("msg", "권한없음");
+		request.setAttribute("path", "../index.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("../common/common_result.jsp");
+		view.forward(request, response);
+	}
 
+%>
 <div class="container">
   <h2>Update Insert Page</h2>
   <form action="./noticeUpdateResult.jsp" method="post">
@@ -46,10 +53,10 @@
       value = "<%= noticeDTO.getTitle() %>">
     </div>
     
+      <label for="contents">CONTENTS:</label>
     <div class="form-group">
     
-      <label for="contents">CONTENTS:</label>
-      <textarea rows="10" cols="100" name="contents"><%= noticeDTO.getContents()%></textarea>
+      <textarea rows="10" cols="160" name="contents"><%= noticeDTO.getContents()%></textarea>
     </div>
     
     <button type="submit" class="btn btn-default">Submit</button>

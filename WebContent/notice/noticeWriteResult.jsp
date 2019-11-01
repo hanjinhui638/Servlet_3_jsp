@@ -25,7 +25,7 @@
  	
  	con.close();
  	
- 	/* int result=0; */
+ 	/* int result=0; 실패시 test*/
  			
  	if(result>0){
  		response.sendRedirect("./noticeList.jsp");

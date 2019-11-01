@@ -1,14 +1,15 @@
-<%@page import="com.jh.member.MemberDTO"%>
 <%@page import="com.jh.util.DBConnector"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="com.jh.member.MemberDAO"%>
+<%@page import="com.jh.member.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
+  <%
 	request.setCharacterEncoding("UTF-8");
 	response.setCharacterEncoding("UTF-8");
 	
 	MemberDTO memberDTO = new MemberDTO();
+	MemberDAO memberDAO = new MemberDAO();
 	
 	memberDTO.setId(request.getParameter("id"));
 	memberDTO.setPw(request.getParameter("pw"));
@@ -16,23 +17,27 @@
 	memberDTO.setEmail(request.getParameter("email"));
 	memberDTO.setPhone(request.getParameter("phone"));
 	
-	MemberDAO memberDAO = new MemberDAO();
-	Connection con = DBConnector.getConnection();
-	int result = memberDAO.memberJoin(con, memberDTO);
+	MemberDTO sessionDTO = (MemberDTO)session.getAttribute("member");
+	memberDTO.setGrade(sessionDTO.getGrade());
 	
-	con.close();
+ 	Connection con = DBConnector.getConnection();
+	int result = memberDAO.memberUpdate(con, memberDTO);
 	
+	con.close(); 
+	String message = "Update Fail ";
 	if(result>0){
-		request.setAttribute("msg", "Join Success");
-	}else {
-		request.setAttribute("msg", "Join Fail");
+		message = "Update Success";
+		session.setAttribute("member", memberDTO);
 	}
 	
+	request.setAttribute("msg", message);
 	request.setAttribute("path", "../index.jsp");
 	
 	RequestDispatcher view = request.getRequestDispatcher("../common/common_result.jsp");
 	view.forward(request, response);
-%>    
+	
+	%>
+
 <!DOCTYPE html>
 <html>
 <head>

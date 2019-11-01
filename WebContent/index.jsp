@@ -1,3 +1,4 @@
+<%@page import="com.jh.member.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,7 +14,17 @@
 	<!-- <a href = "./point/pointList.jsp">Point List</a>
 	<a href = "./notice/noticeList.jsp">Notice List</a>-->
 	<%@ include file="./layout/nav.jsp" %>
-	<h1><%= request.getContextPath() %></h1>	
+<%-- 	<% MemberDTO memberDTO = (MemberDTO)session.getAttribute("member"); %>  중복--%>
+	
+	
+	
+	<div class = "container">
+	<% if(memberDTO != null) {%>
+		<h1>After Success Login</h1>	
+		<%}else { %>
+		<h1>Before Login</h1>
+		<%}%>
+	</div>	
 
 
 </body>

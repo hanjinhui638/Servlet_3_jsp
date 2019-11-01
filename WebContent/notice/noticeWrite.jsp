@@ -10,7 +10,17 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<%@ include file="../layout/nav.jsp" %>
+<%
+	if(memberDTO == null || memberDTO.getGrade() !=0){
+		request.setAttribute("msg", "권한없음");
+		request.setAttribute("path", "../index.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("../common/common_result.jsp");
+		view.forward(request, response);
+	}
 
+
+%>
 <div class="container">
   <h2>Notice Write</h2>
   <form action="./noticeWriteResult.jsp" method="post">
@@ -21,15 +31,13 @@
     
     <div class="form-group">
       <label for="writer">WRITER:</label>
-      <input type="text" class="form-control" id="writer" placeholder="Enter writer" name="writer">
+      <input type="text" class="form-control" id="writer" placeholder="Enter writer" name="writer" value="<%= memberDTO.getId() %>" readonly="readonly">
     </div>
       <label for="contents">CONTENTS:</label>
     <div class="form-group">    
-      <textarea rows="10" cols="100" name = "contents"></textarea>
+      <textarea rows="10" cols="160" name = "contents"></textarea>
     </div>
-    
-    
-    
+        
     <button type="submit" class="btn btn-default">Submit</button>
   </form>
 </div>
