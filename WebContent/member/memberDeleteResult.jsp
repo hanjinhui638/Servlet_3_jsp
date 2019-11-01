@@ -1,3 +1,4 @@
+<%@page import="com.jh.member.MemberDTO"%>
 <%@page import="com.jh.util.DBConnector"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="com.jh.member.MemberDAO"%>
@@ -7,15 +8,15 @@
  	request.setCharacterEncoding("UTF-8");
  	response.setCharacterEncoding("UTF-8");
  	
- 	String id =request.getParameter("id");
- 	
+ 	MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
  	MemberDAO memberDAO = new MemberDAO();
  	Connection con = DBConnector.getConnection();
- 	int result = memberDAO.memberDelete(con, id);
+ 	int result = memberDAO.memberDelete(con, memberDTO);
+ 	con.close();	
  	
- 	con.close();
+ 	session.invalidate();
  	
- 	String message = "Delete Fail List";
+/*  	String message = "Delete Fail List";
  	if(result>0){
  		message = "Delete Success List";
  		request.setAttribute("msg", message);
@@ -24,8 +25,9 @@
  		view.forward(request, response);	
  	}else{
  		response.sendRedirect("../index.jsp");
- 		
- 	}
+ 	} */
+ 	
+		response.sendRedirect("../index.jsp");
  %>   
 <!DOCTYPE html>
 <html>

@@ -3,8 +3,8 @@
 <%@page import="com.jh.member.MemberDAO"%>
 <%@page import="com.jh.member.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- <%
+	pageEncoding="UTF-8"%>
+<%
  	request.setCharacterEncoding("UTF-8");
  	response.setCharacterEncoding("UTF-8");
  	
@@ -12,6 +12,24 @@
  	
  	memberDTO.setId(request.getParameter("id"));
  	memberDTO.setPw(request.getParameter("pw"));
+ 	
+ 	//////////////////////////////////////////////////////
+ 	String check  = request.getParameter("remember");
+ 	
+ 	if(check !=null){
+ 		
+ 	Cookie cookie = new Cookie("id", memberDTO.getId());
+ 	cookie.setPath(request.getContextPath());
+ 	cookie.setMaxAge(3600);
+ 	response.addCookie(cookie);
+ 	}else{
+ 		Cookie cookie = new Cookie("id","");
+ 		cookie.setPath(request.getContextPath());
+ 	 	cookie.setMaxAge(0);
+ 	 	response.addCookie(cookie);
+ 		
+ 	}
+ 	
  	
  	MemberDAO memberDAO = new MemberDAO();
  	Connection con = DBConnector.getConnection();
@@ -39,8 +57,8 @@
  	}
  
  
- %>  
-    
+ %>
+
 <!DOCTYPE html>
 <html>
 <head>

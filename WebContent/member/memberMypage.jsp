@@ -30,14 +30,14 @@
 %>
 
 <div class ="cotainer">
-<h1>ID : <%= memberDTO.getId() %></h1>
-<h1>NAME : <%= memberDTO.getName() %></h1>
-<h1>EMAIL : <%= memberDTO.getEmail() %></h1>
-<h1>PHONE : <%= memberDTO.getPhone() %></h1>
-<h1>GRADE : <%= memberDTO.getGrade() %></h1>
+	<h1>ID : <%= memberDTO.getId() %></h1>
+	<h1>NAME : <%= memberDTO.getName() %></h1>
+	<h1>EMAIL : <%= memberDTO.getEmail() %></h1>
+	<h1>PHONE : <%= memberDTO.getPhone() %></h1>
+	<h1>GRADE : <%= memberDTO.getGrade() %></h1>
 
-<a class = "btn btn-primary" href = "./memberUpdateForm.jsp">수정</a>
-<a class = "btn btn-danger" href = "./memberDeleteResult.jsp">삭제</a>
+	<a class = "btn btn-primary" href = "./memberUpdateForm.jsp">수정</a>
+	<a class = "btn btn-danger" href = "./memberDeleteResult.jsp">삭제</a>
 </div>
 
 

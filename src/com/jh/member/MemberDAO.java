@@ -7,14 +7,16 @@ import java.sql.ResultSet;
 public class MemberDAO {
 	
 	
-	public int memberDelete(Connection con, String id)throws Exception{
+	public int memberDelete(Connection con, MemberDTO memberDTO)throws Exception{
 		int result = 0;
 		
 		String sql = "delete member where id=?";
 		
 		PreparedStatement st = con.prepareStatement(sql);
-		st.setString(1, id);
+		st.setString(1, memberDTO.getId());
 		result = st.executeUpdate();
+		
+		st.close();
 		
 		return result;
 	}
