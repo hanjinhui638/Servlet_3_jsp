@@ -36,6 +36,12 @@
 			<% 
 			
 			}%>
+			
+			<%
+				String name="iu";
+				out.println("<h1>"+name+"</h1>");
+			
+			%>
 	
 	
 	</div>
